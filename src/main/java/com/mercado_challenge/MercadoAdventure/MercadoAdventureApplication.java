@@ -1,13 +1,13 @@
-package com.mercado_challenge.MercadeandoLibre;
+package com.mercado_challenge.MercadoAdventure;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MercadeandoLibreApplication {
+public class MercadoAdventureApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MercadeandoLibreApplication.class, args);
+		SpringApplication.run(MercadoAdventureApplication.class, args);
 	}
 
 }
