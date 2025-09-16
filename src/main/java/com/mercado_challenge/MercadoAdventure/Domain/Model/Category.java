@@ -1,4 +1,4 @@
-package com.mercado_challenge.MercadoAdventure.Domain.Model;
+package com.mercado_challenge.MercadoAdventure.domain.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

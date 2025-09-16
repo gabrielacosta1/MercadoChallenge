@@ -1,4 +1,4 @@
-package com.mercado_challenge.MercadoAdventure.Domain.Model;
+package com.mercado_challenge.MercadoAdventure.domain.model;
 
 import java.util.List;
 
@@ -13,4 +13,19 @@ public class Cart {
     private String CartId;
     private String userId;
     private List<CartItem> items;
+
+    public void addItem(CartItem newItem) {
+        if (this.items == null) {
+            this.items = new java.util.ArrayList<>();
+        }
+        // Check if item already exists
+        for (CartItem item : this.items) {
+            if (item.getProductId().equals(newItem.getProductId())) {
+                item.setQuantity(item.getQuantity() + newItem.getQuantity());
+                return;
+            }
+        }
+        // If not, add new item
+        this.items.add(newItem);
+    }
 }
