@@ -12,11 +12,11 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Collections;
+import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class OrderServiceTest {
@@ -47,15 +47,38 @@ class OrderServiceTest {
 
     @Test
     void testCreateOrder() {
-        // Arrange
         when(orderPersistencePort.save(any(Order.class))).thenReturn(order);
 
-        // Act
         Order result = orderService.createOrder(creationCommand);
 
-        // Assert
         assertNotNull(result);
         assertEquals(order.getOrderId(), result.getOrderId());
         assertEquals(creationCommand.getUserId(), result.getUserId());
+        verify(orderPersistencePort, times(1)).save(any(Order.class));
+    }
+
+    @Test
+    void testUpdateOrderStatus_whenOrderExists() {
+        when(orderPersistencePort.findById("order1")).thenReturn(Optional.of(order));
+        when(orderPersistencePort.save(any(Order.class))).thenReturn(order);
+
+        Order result = orderService.updateOrderStatus("order1", OrderStatus.SHIPPED);
+
+        assertNotNull(result);
+        assertEquals(OrderStatus.SHIPPED, result.getStatus());
+        verify(orderPersistencePort, times(1)).findById("order1");
+        verify(orderPersistencePort, times(1)).save(order);
+    }
+
+    @Test
+    void testUpdateOrderStatus_whenOrderNotFound_thenThrowException() {
+        when(orderPersistencePort.findById("order1")).thenReturn(Optional.empty());
+
+        assertThrows(RuntimeException.class, () -> {
+            orderService.updateOrderStatus("order1", OrderStatus.SHIPPED);
+        });
+
+        verify(orderPersistencePort, times(1)).findById("order1");
+        verify(orderPersistencePort, never()).save(any(Order.class));
     }
 }

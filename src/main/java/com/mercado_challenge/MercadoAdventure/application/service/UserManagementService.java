@@ -26,7 +26,7 @@ public class UserManagementService implements UserManagementPort {
     public User updateUser(UserUpdateCommand command) {
         User existingUser = userPersistencePort.findById(command.getUserId())
             .orElseThrow(() -> new RuntimeException("User not found with ID: " + command.getUserId()));
-        existingUser = User.updateUserFromCommand(command);
+        existingUser.updateFromCommand(command);
         return userPersistencePort.save(existingUser);
     }
 

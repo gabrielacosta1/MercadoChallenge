@@ -31,15 +31,22 @@ public class User {
             );
     }
 
-    public static User updateUserFromCommand(UserUpdateCommand command) {
-        return new User(
-            command.getUserId(),
-            command.getName(),
-            command.getEmail(),
-            command.getPassword(),
-            command.getAddress(),
-            command.getUserType()
-            );
+    public void updateFromCommand(UserUpdateCommand command) {
+        if (command.getName() != null) {
+            this.name = command.getName();
+        }
+        if (command.getEmail() != null) {
+            this.email = command.getEmail();
+        }
+        if (command.getPassword() != null) {
+            this.password = command.getPassword();
+        }
+        if (command.getAddress() != null) {
+            this.address = command.getAddress();
+        }
+        if (command.getUserType() != null) {
+            this.userType = command.getUserType();
+        }
     }
 
 }
