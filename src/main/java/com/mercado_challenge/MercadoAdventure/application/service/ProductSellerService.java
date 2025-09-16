@@ -38,6 +38,8 @@ public class ProductSellerService implements ProductSellerPort{
 
     @Override
     public void deleteProduct(String productId, String password) {
+        // Actualmente, solo se comprueba que el producto exista, pero no que el usuario
+        // autenticado sea el dueño del producto.
         Optional <Product> existingProduct = productPersistencePort.findById(productId);
         if (existingProduct.isPresent()) {
             productPersistencePort.deleteById(productId);

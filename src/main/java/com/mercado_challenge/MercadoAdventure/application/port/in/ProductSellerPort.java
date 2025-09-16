@@ -7,6 +7,10 @@ import com.mercado_challenge.MercadoAdventure.application.port.in.command.Produc
 import com.mercado_challenge.MercadoAdventure.domain.model.Product;
 
 public interface ProductSellerPort {
+    /*  Administra los productos, su venta, actualizacion y borrado.
+        Tambien podemos obtenerlos productos por el id, o una lista
+        con todos los productos que pertenezcan a un vendedor*/
+
     Product sellProduct(ProductCreationCommand command);
     Product updateProduct(ProductUpdateCommand command);
     void deleteProduct(String productId, String password);

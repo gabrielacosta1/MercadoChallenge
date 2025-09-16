@@ -30,9 +30,9 @@ public class ProductController {
     @PutMapping("/{productId}")
     public ResponseEntity<Product> updateProduct(@PathVariable String productId,
             @Valid @RequestBody ProductUpdateCommand command) {
-        // Ensure the productId from the path is set in the command
+
+        // Se asegura que el ID del producto sea el que se use para la actualización,
         if (command.getProductId() == null || !command.getProductId().equals(productId)) {
-            // Or handle as a bad request
             command.setProductId(productId);
         }
         Product updatedProduct = productSellerPort.updateProduct(command);

@@ -18,14 +18,14 @@ public class Cart {
         if (this.items == null) {
             this.items = new java.util.ArrayList<>();
         }
-        // Check if item already exists
+        // Reviso que el producto exista, para sumar cantidad
         for (CartItem item : this.items) {
             if (item.getProductId().equals(newItem.getProductId())) {
                 item.setQuantity(item.getQuantity() + newItem.getQuantity());
                 return;
             }
         }
-        // If not, add new item
+        // Sino agrego el item
         this.items.add(newItem);
     }
 }

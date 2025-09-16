@@ -45,7 +45,7 @@ public class CartService implements CartPort {
     @Override
     public Cart addItemToCart(AddToCartCommand command) {
         Cart cart = cartPersistencePort.findByUserId(command.getUserId())
-            .orElse(new Cart(null, command.getUserId(), new java.util.ArrayList<>()));
+                .orElse(new Cart(null, command.getUserId(), new java.util.ArrayList<>()));
 
         CartItem newItem = new CartItem(command.getProductId(), command.getQuantity());
         cart.addItem(newItem);
@@ -55,7 +55,7 @@ public class CartService implements CartPort {
     @Override
     public Cart removeItemFromCart(String cartId, String productId) {
         Cart cart = cartPersistencePort.findById(cartId)
-            .orElseThrow(() -> new RuntimeException("Cart not found with ID: " + cartId));
+                .orElseThrow(() -> new RuntimeException("Cart not found with ID: " + cartId));
         cart.getItems().removeIf(item -> item.getProductId().equals(productId));
         return cartPersistencePort.save(cart);
     }
@@ -63,21 +63,22 @@ public class CartService implements CartPort {
     @Override
     public Cart getCart(GetCartQuery query) {
         return cartPersistencePort.findByUserId(query.getUserId())
-            .orElseThrow(() -> new RuntimeException("Cart not found for user ID: " + query.getUserId()));
+                .orElseThrow(() -> new RuntimeException("Cart not found for user ID: " + query.getUserId()));
     }
 
     @Override
     public void clearCart(String userId) {
         Cart cart = cartPersistencePort.findByUserId(userId)
-            .orElseThrow(() -> new RuntimeException("Cart not found for user ID: " + userId));
+                .orElseThrow(() -> new RuntimeException("Cart not found for user ID: " + userId));
         cart.getItems().clear();
         cartPersistencePort.save(cart);
     }
 
     @Override
     public Order finishBuy(String userId, String cartId) {
+        // Obtener y validar el carrito
         Cart cart = cartPersistencePort.findById(cartId)
-            .orElseThrow(() -> new RuntimeException("Cart not found with ID: " + cartId));
+                .orElseThrow(() -> new RuntimeException("Cart not found with ID: " + cartId));
 
         if (!cart.getUserId().equals(userId)) {
             throw new SecurityException("User does not have permission to access this cart.");
@@ -90,37 +91,40 @@ public class CartService implements CartPort {
         List<OrderItem> orderItems = new ArrayList<>();
         double totalAmount = 0.0;
 
+        // Procesar cada item del carrito, validar stock y calcular totales
         for (CartItem cartItem : cart.getItems()) {
             Product product = productPersistencePort.findById(cartItem.getProductId())
-                .orElseThrow(() -> new RuntimeException("Product not found with ID: " + cartItem.getProductId()));
+                    .orElseThrow(() -> new RuntimeException("Product not found with ID: " + cartItem.getProductId()));
 
             if (product.getStock() < cartItem.getQuantity()) {
                 throw new IllegalStateException("Not enough stock for product: " + product.getName());
             }
 
+            // Crear el item de la orden
             OrderItem orderItem = new OrderItem(
-                product.getProductId(),
-                userId,
-                cartItem.getQuantity(),
-                product.getPrice()
-            );
+                    product.getProductId(),
+                    userId,
+                    cartItem.getQuantity(),
+                    product.getPrice());
             orderItems.add(orderItem);
 
+            // Actualizo el total y el stock del producto
             totalAmount += product.getPrice() * cartItem.getQuantity();
-            
             product.setStock(product.getStock() - cartItem.getQuantity());
             productPersistencePort.save(product);
         }
 
+        // Crear la orden y limpiar el carrito
         Order order = new Order(
-            null,
-            userId,
-            orderItems,
-            totalAmount,
-            OrderStatus.PENDING
-        );
+                null,
+                userId,
+                orderItems,
+                totalAmount,
+                OrderStatus.PENDING);
 
         Order savedOrder = orderPersistencePort.save(order);
+        
+        // Una vez la orden se creo, se elimina el carrito actual
         cartPersistencePort.deleteCart(cart);
 
         return savedOrder;

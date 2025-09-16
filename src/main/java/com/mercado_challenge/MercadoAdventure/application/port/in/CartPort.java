@@ -8,6 +8,10 @@ import com.mercado_challenge.MercadoAdventure.domain.model.Cart;
 import com.mercado_challenge.MercadoAdventure.domain.model.Order;
 
 public interface CartPort {
+    /*  Finaliza el proceso de compra para un usuario y su carrito.
+        Valida el stock, crea una orden, actualiza el stock de los 
+        productos y elimina el carrito.*/
+
     Cart createCart(String userId);
     Cart addItemToCart(AddToCartCommand command);
     Cart removeItemFromCart(String cartId, String productId);
