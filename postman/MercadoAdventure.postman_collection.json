@@ -1,0 +1,544 @@
+{
+	"info": {
+		"_postman_id": "55f1287e-2974-4b93-8eb5-8a3186a60a1e",
+		"name": "MercadoAdventure",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21803758"
+	},
+	"item": [
+		{
+			"name": "RegisterUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Vendedor Juan\",\r\n    \"email\": \"juan.vendedor@example.com\",\r\n    \"password\": \"password123\",\r\n    \"address\": \"Calle Falsa 123\",\r\n    \"userType\": [\"SELLER\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateNewProduct",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Zapatillas Deportivas Remake\",\r\n    \"description\": \"Las mejores zapatillas para correr.\",\r\n    \"price\": 99.99,\r\n    \"stock\": 10,\r\n    \"userId\": \"622d1c3f-8029-40a4-856a-236ca367760b\",\r\n    \"categoryId\": \"categoria-zapatillas-01\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateCart",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/carts/{{userId_comprador}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"carts",
+						"{{userId_comprador}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddItemToCart",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productId\": \"8b0c2c66-7cad-4858-abe0-af44307ce6f8\",\r\n    \"userId\": \"cf0c58ca-5bf2-4727-90f2-a1a7b601e742\",\r\n    \"cartId\": \"f24446da-6db2-46db-b35a-a6af85ed6249\",\r\n    \"quantity\": 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/carts/items",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"carts",
+						"items"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateReview",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": \"cf0c58ca-5bf2-4727-90f2-a1a7b601e742\",\r\n    \"productId\": \"8b0c2c66-7cad-4858-abe0-af44307ce6f8\",\r\n    \"comment\": \"¡Este producto es una locura viejo!\",\r\n    \"rating\": 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/reviews",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"reviews"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FinishCart",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/carts/finish-buy?userId=cf0c58ca-5bf2-4727-90f2-a1a7b601e742&cartId=f24446da-6db2-46db-b35a-a6af85ed6249",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"carts",
+						"finish-buy"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "cf0c58ca-5bf2-4727-90f2-a1a7b601e742"
+						},
+						{
+							"key": "cartId",
+							"value": "f24446da-6db2-46db-b35a-a6af85ed6249"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCart",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/carts/{{userId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"carts",
+						"{{userId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllCart",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/carts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"carts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUser",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/users/{{userId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"{{userId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllUsers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetReview",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/reviews/{{reviewId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"reviews",
+						"{{reviewId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetOrder",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/orders/{{orderId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"orders",
+						"{{orderId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetOrderPerUser",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/orders/user/{{userId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"orders",
+						"user",
+						"{{userId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetProductBySeller",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "password",
+						"value": "password456",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/products/my-products/{{userId_del_vendedor}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"my-products",
+						"{{userId_del_vendedor}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetProduct",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/products/{{productId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"{{productId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EditUser",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Nombre Actualizado\",\r\n    \"address\": \"Nueva Direccion 456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/{{userId_a_editar}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"{{userId_a_editar}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EditeProduct",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Zapatillas Deportivas Premium\",\r\n    \"price\": 129.99,\r\n    \"stock\": 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/products/{{productId_a_editar}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"{{productId_a_editar}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ChangeStatusOrder",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/orders/{{orderId}}/status?newStatus=DELIVERED",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"orders",
+						"{{orderId}}",
+						"status"
+					],
+					"query": [
+						{
+							"key": "newStatus",
+							"value": "DELIVERED"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteUser",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/users/{{userId_a_borrar}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"{{userId_a_borrar}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteItemFromCart",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/carts/{{cartId}}/items/{{productId_a_quitar}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"carts",
+						"{{cartId}}",
+						"items",
+						"{{productId_a_quitar}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteAllCart",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/carts/{{userId_del_carrito}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"carts",
+						"{{userId_del_carrito}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "userId",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "productId_a_editar",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "reviewId",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "userId_del_vendedor",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "productId",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "cartId",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "orderId",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
