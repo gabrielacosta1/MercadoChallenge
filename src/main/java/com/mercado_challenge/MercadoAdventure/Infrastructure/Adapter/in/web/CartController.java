@@ -6,6 +6,9 @@ import com.mercado_challenge.MercadoAdventure.application.port.in.query.GetCartQ
 import com.mercado_challenge.MercadoAdventure.domain.model.Cart;
 import com.mercado_challenge.MercadoAdventure.domain.model.Order;
 import jakarta.validation.Valid;
+
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -55,5 +58,10 @@ public class CartController {
     public ResponseEntity<Order> finishBuy(@RequestParam String userId, @RequestParam String cartId) {
         Order order = cartPort.finishBuy(userId, cartId);
         return ResponseEntity.ok(order);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Cart>> getAllCarts() {
+        return ResponseEntity.ok(cartPort.getAllCarts());
     }
 }

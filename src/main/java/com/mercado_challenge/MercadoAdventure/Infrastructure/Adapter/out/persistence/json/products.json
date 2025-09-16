@@ -1,0 +1,25 @@
+[ {
+  "productId" : "bb08ee53-8d89-44b9-b40d-9476c64899be",
+  "name" : "Zapatillas Deportivas",
+  "description" : "Las mejores zapatillas para correr.",
+  "price" : 99.99,
+  "stock" : 10,
+  "userId" : "622d1c3f-8029-40a4-856a-236ca367760b",
+  "categoryId" : "categoria-zapatillas-01",
+  "reviews" : null
+}, {
+  "productId" : "8b0c2c66-7cad-4858-abe0-af44307ce6f8",
+  "name" : "Zapatillas Deportivas Premium",
+  "description" : "Las mejores zapatillas para correr.",
+  "price" : 129.99,
+  "stock" : 2,
+  "userId" : "622d1c3f-8029-40a4-856a-236ca367760b",
+  "categoryId" : "categoria-zapatillas-01",
+  "reviews" : [ {
+    "reviewId" : "ee17493c-190d-41cf-b05d-2db55cc14e5c",
+    "userId" : "cf0c58ca-5bf2-4727-90f2-a1a7b601e742",
+    "productId" : "8b0c2c66-7cad-4858-abe0-af44307ce6f8",
+    "rating" : 5,
+    "comment" : "¡Este producto es una locura viejo!"
+  } ]
+} ]

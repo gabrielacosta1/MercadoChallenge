@@ -5,6 +5,9 @@ import com.mercado_challenge.MercadoAdventure.application.port.in.command.UserRe
 import com.mercado_challenge.MercadoAdventure.application.port.in.command.UserUpdateCommand;
 import com.mercado_challenge.MercadoAdventure.domain.model.User;
 import jakarta.validation.Valid;
+
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -45,4 +48,11 @@ public class UserController {
         User user = userManagementPort.getUserById(userId);
         return ResponseEntity.ok(user);
     }
+
+    @GetMapping
+    public ResponseEntity<List<User>> getAllUsers() {
+        List<User> users = userManagementPort.getAllUsers();
+        return ResponseEntity.ok(users);
+    }
 }
+

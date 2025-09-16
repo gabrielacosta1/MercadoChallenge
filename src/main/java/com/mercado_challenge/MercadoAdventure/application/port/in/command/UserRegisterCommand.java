@@ -5,6 +5,7 @@ import java.util.List;
 import com.mercado_challenge.MercadoAdventure.domain.model.UserRole;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,7 +26,7 @@ public class UserRegisterCommand {
     @NotBlank(message = "Address cannot be empty")
     private String address;
 
-    @NotBlank(message = "Phone cannot be empty")
+    @NotEmpty(message = "User type cannot be empty")
     private List<UserRole> userType;
     
 }

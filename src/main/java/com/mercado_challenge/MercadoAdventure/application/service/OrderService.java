@@ -1,5 +1,7 @@
 package com.mercado_challenge.MercadoAdventure.application.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,5 +31,16 @@ public class OrderService implements OrderPort {
         order.setStatus(newStatus);
 
         return orderPersistencePort.save(order);
+    }
+
+    @Override
+    public Order getOrderById(String orderId) {
+        return orderPersistencePort.findById(orderId)
+            .orElseThrow(() -> new RuntimeException("Order not found with ID: " + orderId));
+    }
+
+    @Override
+    public List<Order> getOrdersByUserId(String userId) {
+        return orderPersistencePort.findByUserId(userId);
     }
 }

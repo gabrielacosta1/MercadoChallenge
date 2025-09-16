@@ -125,4 +125,9 @@ public class CartService implements CartPort {
 
         return savedOrder;
     }
+
+    @Override
+    public List<Cart> getAllCarts() {
+        return cartPersistencePort.findAll();
+    }
 }

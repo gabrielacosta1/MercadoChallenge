@@ -1,5 +1,6 @@
 package com.mercado_challenge.MercadoAdventure.application.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +47,9 @@ public class UserManagementService implements UserManagementPort {
             .orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
     }
 
+    @Override
+    public List<User> getAllUsers() {
+        return userPersistencePort.findAll();
+    }
     
 }

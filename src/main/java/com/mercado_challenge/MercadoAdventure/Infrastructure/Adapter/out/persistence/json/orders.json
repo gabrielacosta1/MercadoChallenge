@@ -1,0 +1,12 @@
+[ {
+  "orderId" : "8f5e2edf-e75f-4d8b-9fbc-5a86444dedad",
+  "userId" : "cf0c58ca-5bf2-4727-90f2-a1a7b601e742",
+  "items" : [ {
+    "productId" : "8b0c2c66-7cad-4858-abe0-af44307ce6f8",
+    "userId" : "cf0c58ca-5bf2-4727-90f2-a1a7b601e742",
+    "quantity" : 3,
+    "price" : 129.99
+  } ],
+  "totalAmount" : 389.97,
+  "status" : "DELIVERED"
+} ]

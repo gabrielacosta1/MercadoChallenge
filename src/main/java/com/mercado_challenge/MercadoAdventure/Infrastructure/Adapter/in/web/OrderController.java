@@ -5,6 +5,9 @@ import com.mercado_challenge.MercadoAdventure.application.port.in.command.OrderC
 import com.mercado_challenge.MercadoAdventure.domain.model.Order;
 import com.mercado_challenge.MercadoAdventure.domain.model.OrderStatus;
 import jakarta.validation.Valid;
+
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,5 +32,15 @@ public class OrderController {
     public ResponseEntity<Order> updateOrderStatus(@PathVariable String orderId, @RequestParam OrderStatus newStatus) {
         Order updatedOrder = orderPort.updateOrderStatus(orderId, newStatus);
         return ResponseEntity.ok(updatedOrder);
+    }
+
+    @GetMapping("/{orderId}")
+    public ResponseEntity<Order> getOrderById(@PathVariable String orderId) {
+        return ResponseEntity.ok(orderPort.getOrderById(orderId));
+    }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<Order>> getOrdersByUserId(@PathVariable String userId) {
+        return ResponseEntity.ok(orderPort.getOrdersByUserId(userId));
     }
 }

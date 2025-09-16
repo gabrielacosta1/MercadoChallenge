@@ -1,0 +1,15 @@
+[ {
+  "userId" : "622d1c3f-8029-40a4-856a-236ca367760b",
+  "name" : "Vendedor Juan",
+  "email" : "juan.vendedor@example.com",
+  "password" : "password123",
+  "address" : "Calle Falsa 123",
+  "userType" : [ "SELLER" ]
+}, {
+  "userId" : "cf0c58ca-5bf2-4727-90f2-a1a7b601e742",
+  "name" : "Nombre Actualizado",
+  "email" : "ana.compradora@example.com",
+  "password" : "password456",
+  "address" : "Nueva Direccion 456",
+  "userType" : [ "BUYER" ]
+} ]
