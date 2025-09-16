@@ -3,6 +3,7 @@ package com.mercado_challenge.MercadoAdventure.application.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.mercado_challenge.MercadoAdventure.application.port.in.UserManagementPort;
 import com.mercado_challenge.MercadoAdventure.application.port.in.command.UserRegisterCommand;
@@ -10,6 +11,7 @@ import com.mercado_challenge.MercadoAdventure.application.port.in.command.UserUp
 import com.mercado_challenge.MercadoAdventure.application.port.out.UserPersistencePort;
 import com.mercado_challenge.MercadoAdventure.domain.model.User;
 
+@Service
 public class UserManagementService implements UserManagementPort {
     @Autowired
     private UserPersistencePort userPersistencePort;

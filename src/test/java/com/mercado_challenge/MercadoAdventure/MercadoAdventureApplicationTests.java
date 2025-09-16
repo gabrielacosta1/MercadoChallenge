@@ -1,10 +1,10 @@
-package com.mercado_challenge.MercadeandoLibre;
+package com.mercado_challenge.MercadoAdventure;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MercadeandoLibreApplicationTests {
+class MercadoAdventureApplicationTests {
 
 	@Test
 	void contextLoads() {
