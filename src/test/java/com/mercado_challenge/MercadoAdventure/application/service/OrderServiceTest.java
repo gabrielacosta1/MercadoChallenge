@@ -45,6 +45,9 @@ class OrderServiceTest {
         order.setStatus(creationCommand.getStatus());
     }
 
+    /**
+     * Prueba para verificar la creación de un nuevo pedido.
+     */
     @Test
     void testCreateOrder() {
         when(orderPersistencePort.save(any(Order.class))).thenReturn(order);
@@ -57,6 +60,9 @@ class OrderServiceTest {
         verify(orderPersistencePort, times(1)).save(any(Order.class));
     }
 
+    /**
+     * Prueba para verificar la actualización del estado de un pedido cuando el pedido existe.
+     */
     @Test
     void testUpdateOrderStatus_whenOrderExists() {
         when(orderPersistencePort.findById("order1")).thenReturn(Optional.of(order));
@@ -70,6 +76,9 @@ class OrderServiceTest {
         verify(orderPersistencePort, times(1)).save(order);
     }
 
+    /**
+     * Prueba para verificar que se lanza una excepción al intentar actualizar el estado de un pedido que no existe.
+     */
     @Test
     void testUpdateOrderStatus_whenOrderNotFound_thenThrowException() {
         when(orderPersistencePort.findById("order1")).thenReturn(Optional.empty());

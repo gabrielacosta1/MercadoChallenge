@@ -42,6 +42,9 @@ class CartServiceTest {
         addToCartCommand = new AddToCartCommand("prod1", "user1", "cart1", 2);
     }
 
+    /**
+     * Prueba para verificar la creación de un nuevo carrito cuando no existe uno para el usuario.
+     */
     @Test
     void testCreateCart_whenCartDoesNotExist() {
         when(cartPersistencePort.findByUserId("user1")).thenReturn(Optional.empty());
@@ -55,6 +58,9 @@ class CartServiceTest {
         verify(cartPersistencePort, times(1)).save(any(Cart.class));
     }
 
+    /**
+     * Prueba para verificar que no se crea un nuevo carrito si ya existe uno para el usuario.
+     */
     @Test
     void testCreateCart_whenCartExists() {
         when(cartPersistencePort.findByUserId("user1")).thenReturn(Optional.of(cart));
@@ -67,6 +73,9 @@ class CartServiceTest {
         verify(cartPersistencePort, never()).save(any(Cart.class));
     }
 
+    /**
+     * Prueba para verificar la funcionalidad de añadir un artículo a un carrito existente.
+     */
     @Test
     void testAddItemToCart() {
         when(cartPersistencePort.findByUserId("user1")).thenReturn(Optional.of(cart));
@@ -79,6 +88,9 @@ class CartServiceTest {
         verify(cartPersistencePort, times(1)).save(any(Cart.class));
     }
 
+    /**
+     * Prueba para verificar que se lanza una excepción cuando se intenta eliminar un artículo de un carrito que no existe.
+     */
     @Test
     void testRemoveItemFromCart_whenCartNotFound_thenThrowException() {
         when(cartPersistencePort.findById("cart1")).thenReturn(Optional.empty());
@@ -91,6 +103,9 @@ class CartServiceTest {
         verify(cartPersistencePort, never()).save(any(Cart.class));
     }
 
+    /**
+     * Prueba para verificar que se lanza una excepción cuando se intenta recuperar un carrito que no existe.
+     */
     @Test
     void testGetCart_whenCartNotFound_thenThrowException() {
         GetCartQuery query = new GetCartQuery("user1");
@@ -103,6 +118,9 @@ class CartServiceTest {
         verify(cartPersistencePort, times(1)).findByUserId("user1");
     }
 
+    /**
+     * Prueba para verificar que se lanza una excepción cuando se intenta vaciar un carrito que no existe.
+     */
     @Test
     void testClearCart_whenCartNotFound_thenThrowException() {
         when(cartPersistencePort.findByUserId("user1")).thenReturn(Optional.empty());
@@ -115,6 +133,9 @@ class CartServiceTest {
         verify(cartPersistencePort, never()).save(any(Cart.class));
     }
 
+    /**
+     * Prueba para verificar que se lanza una excepción cuando se intenta finalizar una compra para un carrito que no existe.
+     */
     @Test
     void testFinishBuy_whenCartNotFound_thenThrowException() {
         when(cartPersistencePort.findById("cart1")).thenReturn(Optional.empty());
@@ -124,6 +145,9 @@ class CartServiceTest {
         });
     }
 
+    /**
+     * Prueba para verificar que se lanza una excepción cuando un usuario no autorizado intenta finalizar una compra.
+     */
     @Test
     void testFinishBuy_whenUserNotAuthorized_thenThrowException() {
         when(cartPersistencePort.findById("cart1")).thenReturn(Optional.of(cart));
@@ -133,6 +157,9 @@ class CartServiceTest {
         });
     }
 
+    /**
+     * Prueba para verificar que se lanza una excepción cuando se intenta finalizar una compra para un carrito vacío.
+     */
     @Test
     void testFinishBuy_whenCartIsEmpty_thenThrowException() {
         when(cartPersistencePort.findById("cart1")).thenReturn(Optional.of(cart));

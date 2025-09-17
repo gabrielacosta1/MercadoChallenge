@@ -51,6 +51,9 @@ class ReviewServiceTest {
         review.setRating(5);
     }
 
+    /**
+     * Prueba para verificar la funcionalidad de dejar una reseña para un producto existente.
+     */
     @Test
     void testLeaveReview_whenProductExists() {
         when(productPersistencePort.findById("prod1")).thenReturn(Optional.of(product));
@@ -67,6 +70,9 @@ class ReviewServiceTest {
         verify(productPersistencePort, times(1)).save(product);
     }
 
+    /**
+     * Prueba para verificar que se lanza una excepción al intentar dejar una reseña para un producto que no existe.
+     */
     @Test
     void testLeaveReview_whenProductNotFound_thenThrowException() {
         when(productPersistencePort.findById("prod1")).thenReturn(Optional.empty());
@@ -79,6 +85,9 @@ class ReviewServiceTest {
         verify(reviewPersistencePort, never()).save(any(Review.class));
     }
 
+    /**
+     * Prueba para verificar la eliminación de una reseña existente por un usuario autorizado.
+     */
     @Test
     void testDeleteReview_whenReviewExistsAndUserIsAuthorized() {
         when(reviewPersistencePort.findById("rev1")).thenReturn(Optional.of(review));
@@ -92,6 +101,9 @@ class ReviewServiceTest {
         verify(reviewPersistencePort, times(1)).deleteById("rev1");
     }
 
+    /**
+     * Prueba para verificar que se lanza una excepción al intentar eliminar una reseña que no existe.
+     */
     @Test
     void testDeleteReview_whenReviewNotFound_thenThrowException() {
         when(reviewPersistencePort.findById("rev1")).thenReturn(Optional.empty());
@@ -104,6 +116,9 @@ class ReviewServiceTest {
         verify(reviewPersistencePort, never()).deleteById(anyString());
     }
 
+    /**
+     * Prueba para verificar que se lanza una excepción cuando un usuario no autorizado intenta eliminar una reseña.
+     */
     @Test
     void testDeleteReview_whenUserNotAuthorized_thenThrowException() {
         when(reviewPersistencePort.findById("rev1")).thenReturn(Optional.of(review));
@@ -116,6 +131,9 @@ class ReviewServiceTest {
         verify(reviewPersistencePort, never()).deleteById(anyString());
     }
 
+    /**
+     * Prueba para verificar que se lanza una excepción al intentar recuperar una reseña por ID que no existe.
+     */
     @Test
     void testGetReviewById_whenReviewNotFound_thenThrowException() {
         when(reviewPersistencePort.findById("rev1")).thenReturn(Optional.empty());

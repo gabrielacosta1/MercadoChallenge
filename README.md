@@ -102,3 +102,7 @@ Gestión de Reseñas (/reviews)
 ## Ejecutar el Proyecto
 
 Para levantar el proyecto localmente, sigue las instrucciones detalladas en el archivo `run.md`.
+
+# Repositorio GIT
+
+Link: https://github.com/gabrielacosta1/MercadoChallenge

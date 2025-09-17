@@ -57,6 +57,9 @@ class UserManagementServiceTest {
         );
     }
 
+    /**
+     * Prueba para verificar la funcionalidad de registrar un nuevo usuario.
+     */
     @Test
     void testRegisterUser() {
         // Arrange
@@ -71,6 +74,9 @@ class UserManagementServiceTest {
         verify(userPersistencePort, times(1)).save(any(User.class));
     }
 
+    /**
+     * Prueba para verificar la actualización de un usuario existente.
+     */
     @Test
     void testUpdateUser_whenUserExists() {
         // Arrange
@@ -87,6 +93,9 @@ class UserManagementServiceTest {
         verify(userPersistencePort, times(1)).save(user);
     }
 
+    /**
+     * Prueba para verificar que se lanza una excepción al intentar actualizar un usuario que no existe.
+     */
     @Test
     void testUpdateUser_whenUserNotFound_thenThrowException() {
         // Arrange
@@ -100,6 +109,9 @@ class UserManagementServiceTest {
         verify(userPersistencePort, never()).save(any(User.class));
     }
 
+    /**
+     * Prueba para verificar la eliminación de un usuario existente.
+     */
     @Test
     void testDeleteUser_whenUserExists() {
         // Arrange
@@ -114,6 +126,9 @@ class UserManagementServiceTest {
         verify(userPersistencePort, times(1)).deleteById("1");
     }
 
+    /**
+     * Prueba para verificar que se lanza una excepción al intentar eliminar un usuario que no existe.
+     */
     @Test
     void testDeleteUser_whenUserNotFound_thenThrowException() {
         // Arrange
@@ -127,6 +142,9 @@ class UserManagementServiceTest {
         verify(userPersistencePort, never()).deleteById(anyString());
     }
 
+        /**
+     * Prueba para verificar la recuperación de un usuario existente por ID.
+     */
     @Test
     void testGetUserById_whenUserExists() {
         // Arrange
@@ -141,6 +159,10 @@ class UserManagementServiceTest {
         verify(userPersistencePort, times(1)).findById("1");
     }
 
+
+        /**
+     * Prueba para verificar que se lanza una excepción al intentar recuperar un usuario por ID que no existe.
+     */
     @Test
     void testGetUserById_whenUserNotFound_thenThrowException() {
         // Arrange

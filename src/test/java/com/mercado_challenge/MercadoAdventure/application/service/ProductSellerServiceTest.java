@@ -57,6 +57,9 @@ class ProductSellerServiceTest {
         );
     }
 
+    /**
+     * Prueba para verificar la funcionalidad de vender un nuevo producto.
+     */
     @Test
     void testSellProduct() {
         when(productPersistencePort.save(any(Product.class))).thenReturn(product);
@@ -69,6 +72,9 @@ class ProductSellerServiceTest {
         verify(productPersistencePort, times(1)).save(any(Product.class));
     }
 
+    /**
+     * Prueba para verificar la actualización de un producto existente.
+     */
     @Test
     void testUpdateProduct_whenProductExists() {
         when(productPersistencePort.findById("prod1")).thenReturn(Optional.of(product));
@@ -82,6 +88,9 @@ class ProductSellerServiceTest {
         verify(productPersistencePort, times(1)).save(product);
     }
 
+    /**
+     * Prueba para verificar que se lanza una excepción al intentar actualizar un producto que no existe.
+     */
     @Test
     void testUpdateProduct_whenProductNotFound_thenThrowException() {
         when(productPersistencePort.findById("prod1")).thenReturn(Optional.empty());
@@ -94,6 +103,9 @@ class ProductSellerServiceTest {
         verify(productPersistencePort, never()).save(any(Product.class));
     }
 
+    /**
+     * Prueba para verificar la eliminación de un producto existente.
+     */
     @Test
     void testDeleteProduct_whenProductExists() {
         when(productPersistencePort.findById("prod1")).thenReturn(Optional.of(product));
@@ -105,6 +117,9 @@ class ProductSellerServiceTest {
         verify(productPersistencePort, times(1)).deleteById("prod1");
     }
 
+    /**
+     * Prueba para verificar que se lanza una excepción al intentar eliminar un producto que no existe.
+     */
     @Test
     void testDeleteProduct_whenProductNotFound_thenThrowException() {
         when(productPersistencePort.findById("prod1")).thenReturn(Optional.empty());
@@ -117,6 +132,9 @@ class ProductSellerServiceTest {
         verify(productPersistencePort, never()).deleteById(anyString());
     }
 
+    /**
+     * Prueba para verificar la recuperación de productos para un usuario dado cuando existen productos.
+     */
     @Test
     void testGetMyProducts_whenProductsExist() {
         when(productPersistencePort.findByUserId("user1")).thenReturn(Collections.singletonList(product));
@@ -129,6 +147,9 @@ class ProductSellerServiceTest {
         verify(productPersistencePort, times(1)).findByUserId("user1");
     }
 
+    /**
+     * Prueba para verificar que se lanza una excepción al intentar recuperar productos para un usuario que no tiene productos.
+     */
     @Test
     void testGetMyProducts_whenNoProductsFound_thenThrowException() {
         when(productPersistencePort.findByUserId("user1")).thenReturn(Collections.emptyList());
@@ -140,6 +161,9 @@ class ProductSellerServiceTest {
         verify(productPersistencePort, times(1)).findByUserId("user1");
     }
 
+    /**
+     * Prueba para verificar que se lanza una excepción al intentar recuperar un producto por ID que no existe.
+     */
     @Test
     void testGetProductById_whenProductNotFound_thenThrowException() {
         when(productPersistencePort.findById("prod1")).thenReturn(Optional.empty());
